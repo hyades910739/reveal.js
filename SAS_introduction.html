@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js</title>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<!-- my own css -->
+	<style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+		body{
+			font-family: 'Noto Sans TC', sans-serif;
+		} 
+		.reveal p {
+		  	font-size: 0.8em;
+		    text-align: left;
+			font-family: 'Noto Sans TC', sans-serif;
+		    
+		}
+		.reveal h1 {
+			font-family: 'Noto Sans TC', sans-serif;			
+		  	font-size: 2em;
+		  	font-weight: bold;
+		  	text-align: left;
+		}
+		.reveal h2 {
+			font-family: 'Noto Sans TC', sans-serif;
+		  	font-size: 1.6em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal h3 {
+		  	font-size: 1.3em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal ul,ol {
+			font-family: 'Noto Sans TC', sans-serif;			
+		    display: block;
+		    font-size: 0.9em;
+		}
+		.reveal section img {
+		 	background:none; 
+		 	border:none; 
+		 	box-shadow:none; 
+		}
+		.vid{
+			 background-color: rgba(214, 245, 245,0.7);
+
+		}
+
+	</style>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>資料分析與SAS操作</h1>
+					<p>統碩二- 賴東昇</p>
+
+				</section>
+				<section data-markdown>
+					## 今天要幹嘛
+					*  淺談資料分析流程
+					*  SAS操作示範
+				</section>
+				<section data-markdown>
+					## 資料分析流程  
+					* 資料取得   
+					* 資料探索   
+					* 建模   
+					* 模型評估    
+				</section>
+					
+				<section>
+					<h2>資料分析工具</h2>
+					<p>工具不是重點，概念才是真的</p>
+					<p class="fragment">R > Python > SAS > other</p>
+					<p class="fragment">個人意見啦...</p>
+				</section>
+				<section data-markdown>
+					## 去哪用SAS
+					*  掛VPN去學校授權軟體下載  
+					*  去電算中心要光碟(?)  
+					*  用政大雲的雲端桌面  
+				</section>
+
+				<section>
+					<h2>SAS實戰分析</h2>
+					<p>收起你的腦袋吧</p>  
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				//width:800,
+				//height:500,
+				//margin:0.1,
+
+				//minScale:1.2,
+				//maxScale: 5,
+				progress:true,
+				slideNumber: true,
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
