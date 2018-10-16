@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js</title>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<!-- my own css -->
+	<style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+		body{
+			font-family: 'Noto Sans TC', sans-serif;
+		} 
+		.reveal p {
+		  	font-size: 0.8em;
+		    text-align: left;
+			font-family: 'Noto Sans TC', sans-serif;
+		    
+		}
+		.reveal h1 {
+			font-family: 'Noto Sans TC', sans-serif;			
+		  	font-size: 2em;
+		  	font-weight: bold;
+		  	text-align: left;
+		}
+		.reveal h2 {
+			font-family: 'Noto Sans TC', sans-serif;
+		  	font-size: 1.6em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal h3 {
+		  	font-size: 1.3em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal ul{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		  	text-align: left;		    
+		}
+		.reveal li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 1em;
+		    margin-top: 0.7em;
+		  	text-align: left;		    
+		}		
+		.reveal tr,th{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		    text-align: left;		    
+		}
+
+		.reveal section img {
+		 	background:none; 
+		 	border:none; 
+		 	box-shadow:none; 
+		}
+		.vid{
+			 background-color: rgba(214, 245, 245,0.7);
+
+		}
+
+	</style>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Lyrics sentiment analysis</h1>
+					<p>統碩二一行人</p>
+					<p>code : <a href="https://github.com/hyades910739/NJU_MusicMood">https://github.com/hyades910739/NJU_MusicMood</a></p>
+
+				</section>
+				<section>
+					<h2>Data : NJU Musicmood</h2>	
+					<p>計777筆的歌詞</p>
+					<table>
+						<tr>	
+							<th>Mood Category</th>
+							<th>Training Samples</th>		
+							<th>Testing Samples</th>	
+						</tr>
+						<tr>
+							<td>angry</td>
+							<td>100</td>					
+							<td>71</td>					
+						</tr>
+						<tr>	
+							<td>happy</td>				
+							<td>100</td>   					
+							<td>106</td>				
+						</tr>
+						<tr>	
+							<td>relaxed</td>    		
+							<td>100</td>					
+							<td>101</td>				
+						</tr>
+						<tr>	
+							<td>sad</td>				
+							<td>100</td>					
+							<td>99</td>					
+						</tr>
+					</table>								
+				</section>
+				<section>
+					<h2>Ｍodel 1: TFIDF(Baseline)</h2>
+						<ul>
+							<li>Regular bag-of-word TFIDF with SVM</li>		  
+							<li>TrainACC : 0.8625</li>
+							<li>TestACC  : 0.307</li>
+						</ul>
+				</section>
+				<section>
+					<h2>Ｍodel 2: TFIDF_classifier</h2>
+						<ul>
+							<li>Ref : AUTOMATIC MOOD CLASSIFICATIONUSING TF*IDF BASED ON LYRICS </li>		  
+							<li>TrainACC : 0.845</li>
+							<li>TestACC  : 0.297</li>
+						</ul>					   
+				</section>
+					
+				<section>
+					<h2>Model 3 : CNN</h2>
+					<p>Ref : Convolutional Neural Networks for Sentence Classification</p>
+					<p>以本論文的精神建構簡單的CNN模型</p>					
+				</section>
+				<section>
+					<h2>Model 3 : CNN</h2>
+					<p>以類似圖像辨識的概念處理文字</p>					
+					<img src="img/cnn1.png">
+				</section>
+				<section>
+					<h2>Tips for CNN</h2>					
+					<ul>
+						<li>Embedding : non-static 較好</li>
+						<li>Filters region Size : 慢慢往上找</li>
+						<li>Filters Size : 固定一個大小慢慢往上找，中央伍為準散開</li>
+						<li>MaxPooling : 唯一指名：1</li>
+					</ul>
+					<p style="font-size: 0.6em;margin-top: 2em;">Ref : A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification
+					</p>
+				</section>
+
+				<section>
+					<h2>Our Setting(currently)</h2>					
+					<ul>
+						<li>Embedding : Word2Vec : GoogleNews 300D</li>
+						<li>基本上沒有篩字詞</li>
+						<li>TrainAcc : 0.95-0.98</li>
+						<li>TestAcc : 0.40-0.47</li>
+					</ul>
+				</section>				
+				<section>
+					<h2>Summary</h2>					
+
+					<table>
+					　<tr>
+					　	<td>Method</td>
+					　	<td>Train_Acc</td>
+					　	<td>Test_Acc</td>
+					　</tr>
+					　<tr>
+					　	<td>TFIDF(Baseline)</td>
+					　	<td>0.8625</td>
+					　	<td>0.307</td>
+					　</tr>
+
+					　<tr>
+					　	<td>tfidf based classifer</td>
+					　	<td>0.845</td>
+					　	<td>0.297</td>
+					　</tr>
+
+					　<tr>
+					　	<td>Convolutional Neural Network</td>
+					　	<td>0.95-0.98</td>
+					　	<td>0.4-0.47</td>
+					　</tr>
+					</table>
+
+
+
+				</section>
+
+				<section>
+					<h2>SAS實戰分析</h2>
+					<p>收起你的腦袋吧</p>  
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				//width:800,
+				//height:500,
+				//margin:0.1,
+
+				//minScale:1.2,
+				//maxScale: 5,
+				progress:true,
+				slideNumber: true,
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
