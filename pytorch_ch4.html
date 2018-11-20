@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js</title>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<!-- my own css -->
+	<style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+		body{
+			font-family: 'Noto Sans TC', sans-serif;
+		} 
+		h1,h2,h3,h4 {
+			text-transform: none !important;
+			letter-spacing: 1px !important;			
+
+		}
+		.reveal p {
+		  	font-size: 0.8em;
+		    text-align: left;
+			font-family: 'Noto Sans TC', sans-serif;
+		    
+		}
+		.reveal h1 {
+			font-family: 'Noto Sans TC', sans-serif;			
+		  	font-size: 2em;
+		  	font-weight: bold;
+		  	text-align: left;
+		}
+		.reveal h2 {
+			font-family: 'Noto Sans TC', sans-serif;
+		  	font-size: 1.6em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal h3 {
+		  	font-size: 1.3em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal ol>li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		  	text-align: left;
+
+		}
+	
+		.reveal li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 1em;
+		    margin-top: 0.8em;
+		  	text-align: left;		    
+		}		
+		.reveal tr,th{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		    text-align: left;		    
+		}
+
+		.reveal section img {
+		 	background:none; 
+		 	border:none; 
+		 	box-shadow:none; 
+		}
+		.vid{
+			 background-color: rgba(214, 245, 245,0.7);
+
+		}
+		code{
+			font-size: 20px !important;
+			line-height: 30px !important;
+
+		}
+
+	</style>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Chap 4 : The World as Tensors</h2>
+					<p>賴東昇</p>
+					
+				</section>
+
+				<section style="text-align: left;">
+					<h2>Outline</h2>
+					<ol style="margin-left: 120px">
+						<li>Tabular Data</li>		  
+						<li>Time Series</li>
+						<li>Text</li>
+						<li>Audio</li>
+						<li>Images</li>
+						<li>Volumetric Data</li>
+						<li>Video Data</li>						
+					</ol>		
+				</section>
+				<section id="tabular">
+					<section style="text-align: left;">
+						<h2>1. Tabular Data</h2>
+						<ol style="margin-left: 120px">
+							<li>反正就轉成tensor</li>	
+							<li>把y類別轉成one-hot-encoding</li>	  			
+						</ol>	
+					</section>
+
+					<section style="text-align: left;">
+						<h2>Example : Iris dataset</h2>
+						<p>load dataset</p>
+						<pre><code class="py" data-trim data-noescape>
+							from sklearn import datasets
+							iris = datasets.load_iris()
+							#x
+							iris.data
+							tensor_iris = torch.from_numpy(iris.data)
+							#y
+							iris.target
+						</code></pre>
+						<p>also available at : 
+						<a href="https://archive.ics.uci.edu/ml/datasets/iris">https://archive.ics.uci.edu/ml/datasets/iris</a></p>
+					</section>
+
+					<section style="text-align: left;">
+						<h2>One-Hot-Encoding</h2>
+						<p>for nominal or ordinal scale</p>
+						<pre><code class="py" data-trim data-noescape>
+							y = torch.from_numpy(iris.target)
+							y_onethot = torch.zeros(tensor_iris.shape[0],3)
+							y_onethot.scatter_(1,y.unsqueeze(1),1)# dim,index,src
+						</code></pre>
+					</section>
+					<section style="text-align: left;">
+						<h2>Descriptive statistics</h2>
+						<p>for nominal or ordinal scale</p>
+						<pre><code class="py" data-trim data-noescape>
+							tensor_iris.var(dim=0)	
+							#tensor([5.8433, 3.0540, 3.7587, 1.1987], dtype=torch.float64)
+							tensor_iris.mean(dim=0)
+							#tensor([0.6857, 0.1880, 3.1132, 0.5824], dtype=torch.float64)
+						</code></pre>
+					</section>
+				</section>
+
+				<section id="timeseries">
+					<section style="text-align: left;">
+						<h2>2. Time Series</h2>
+						<ol>
+							<li>阿不就多一個時間維度</li>
+							<li>Data : <a href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset</a></li>
+						</ol>
+					</section>
+					<section style="text-align: left;">
+						<h2>Read Data</h2>
+						<pre><code class="py" data-trim data-noescape>
+							#use numpy
+							bikes_numpy = np.loadtxt("Bike-Sharing-Dataset/hour.csv", 
+								dtype=np.float32, delimiter=",", skiprows=1,
+								converters={1: lambda x: float(x[8:10])})
+							bikes = torch.from_numpy(bikes_numpy)
+							#or pandas
+							bikes = pd.read_csv("Bike-Sharing-Dataset/hour.csv")
+							names = bikes.columns
+							bikes.dteday = bikes.dteday.apply(func=lambda x:int(x[8:10]))
+							bikes = torch.from_numpy(bikes.values)
+						</code></pre>
+					</section>
+					<section style="text-align: left;">
+						<h2>Sort and reshape</h2>
+						<pre><code class="py" data-trim data-noescape>
+							#sort index
+							_, sorted_row_idxs = torch.sort(bikes[:, 0], dim=0)
+							bikes = bikes[sorted_row_idxs]
+							#subset
+							bikes = bikes[324:396,:]
+							#reshape
+							daily_bikes = bikes.view(-1, 24, bikes.shape[1]) #(3,24,17)
+							daily_bikes = daily_bikes.transpose(1, 2) #(3,17,24)
+						</code></pre>
+					</section>
+
+					<section style="text-align: left;">
+						<h2>One-hot-encoding for category feature</h2>
+						<pre><code class="py" data-trim data-noescape>
+							daily_weather_onehot = torch.zeros(daily_bikes.shape[0], 4,
+								 daily_bikes.shape[2]) # (3,4,24)
+							daily_weather_onehot.scatter_(1,
+								 daily_bikes[:,9,:].long().unsqueeze(1) - 1, 1.0) # (3,4,24)
+							daily_bikes = torch.cat((daily_bikes, daily_weather_onehot), 1) # (3,21,24)
+						</code></pre>
+					</section>
+
+
+				</section>
+
+				<section id="text">
+					<section style="text-align: left;">
+						<h2>3. Text</h2>
+						<ol style="margin-left: 120px">
+							<li>one-hot-encoding...AGAIN</li>	
+							<li>other representations?</li>	  			
+						</ol>	
+					</section>
+					<section style="text-align: left;">
+						<h2>From Unicode to ASCII</h2>
+						<pre><code class="py" data-trim data-noescape>
+							import unicodedata
+							import string
+							string.ascii_letters
+							#'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+							all_letters = string.ascii_letters + " .,l'"
+							def unicode_to_ascii(s):
+							    return ''.join(c for c in unicodedata.normalize('NFD', s) if 
+							                   unicodedata.category(c) != 'Mn' and c in all_letters)
+							unicode_to_ascii("This cöürse is really Äwesome.")
+							#'This course is really Awesome.'
+						</code></pre>	
+						<ol style="margin-left: 120px">
+							<li>
+								unicode category reference :   
+								<a href="https://en.wikipedia.org/wiki/Unicode_character_property">https://en.wikipedia.org/wiki/Unicode_character_property</a>
+							</li>	
+							<li>
+								 unicode Normalization :   
+								<a href="https://zh.wikipedia.org/wiki/Unicode%E7%AD%89%E5%83%B9%E6%80%A7">https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization</a>
+							</li>	
+
+						</ol>	
+					</section>
+
+
+					<section style="text-align: left;">
+						<h2>One-Hot-Encoding</h2>
+						<pre><code class="py" data-trim data-noescape>
+							line = "This course is really aewsome. I like it so much, I really love it!"
+							tensor = torch.zeros(len(line), n_letters)
+							for i, letter in enumerate(line.lower().strip()):
+							    letter_index = all_letters.find(letter)
+							    tensor[i][letter_index] = 1
+						</code></pre>	
+					</section>
+					<section style="text-align: left;">
+						<h2>One-Hot-Encoding(word)</h2>
+						<pre><code class="py" data-trim data-noescape>
+							text ='''
+							A management information system (MIS) is an information system[1] used for decision-making, and for the coordination, control, analysis, and visualization of information in an organization; especially in a company.
+							The study of management information systems examines people and technology in an organizational context.[2]
+							In a corporate setting, the ultimate goal of the use of a management information system is to increase the value and profits of the business.[3]
+							'''
+
+							all_words = <mark>set</mark>(text.lower().replace('\n',' ').split())
+							punctuation = '.,;:"!?”“_-'
+							all_words = {word.strip(punctuation): i for (i, word) in enumerate(all_words)}
+
+						</code></pre>	
+					</section>
+					<section style="text-align: left;">
+						<h2>One-Hot-Encoding(word) (cont)</h2>
+						<pre><code class="py" data-trim data-noescape>
+							lines = text.<mark>strip()</mark>.split('\n')
+
+							line = lines[0]
+							words_in_line = [word.strip(punctuation) for word in line.lower().split(' ')]
+							#words_in_line
+
+							tensor = torch.zeros(len(words_in_line), len(all_words))
+
+							for i, word in enumerate(words_in_line):
+							    word_index = all_words[word]
+							    tensor[i][word_index] = 1
+						</code></pre>	
+					</section>
+				</section>
+				<section id="audio">
+					<section>
+						<h2>4.Audio</h2>
+						<p>dimension : BxCxL or LxBxC</p>
+						<p>quick demo in Jupyter Notebook</p>
+					</section>
+				</section>
+				<section id="image">
+					<section>
+						<h2>5.image</h2>
+						<p>dimension : BxCxHxW</p>
+					</section>
+					<section style="text-align: left;">
+						<h2>Display image in Jupyter Notebook</h2>
+						<pre><code class="py" data-trim data-noescape>
+							from IPython.display import Image
+							Image(url= "/cat.jpg",width=300)
+						</code></pre>	
+					</section>
+					<section style="text-align: left;">
+						<h2>Load image as numpy array</h2>
+						<pre><code class="py" data-trim data-noescape>
+							import imageio
+							img_arr = imageio.imread('cat.jpg') #(463,600,3)
+							img = torch.from_numpy(img_arr)
+							out = torch.transpose(img, 0, 2) #(3,600,463)
+						</code></pre>	
+					</section>
+
+					<section style="text-align: left;">
+						<h2>pre-allocate tensors for batch of images </h2>
+						<pre><code class="py" data-trim data-noescape>
+							batch_size = 100
+							batch = torch.ByteTensor(100, 3, 256, 256)
+							#normalization
+							batch = batch.float()
+							batch/255
+						</code></pre>	
+					</section>
+				</section>
+
+				<section id="volumetric">
+					<section data-markdown>
+					## 6.Volumetric Data
+					* 3D的影像，ex. 3D斷層掃描
+					* 可以視為許多2D影像一層一層疊起來
+					* 以tensor的概念來考慮，就只是比圖片多一維度: depth
+					* dimension : BxCxDxHxW
+					</section>
+				</section>
+				<section id="volumetric">
+					<section data-markdown>
+					## 7.Video
+					demo demo gogogo
+					</section>
+				</section>
+
+
+				<section>
+					<h2>QA???</h2>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				//width:800,
+				//height:500,
+				//margin:0.1,
+
+				//minScale:1.2,
+				//maxScale: 5,
+				progress:true,
+				slideNumber: true,
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
