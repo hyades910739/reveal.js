@@ -110,19 +110,103 @@
 
 				<section style="text-align: left;">
 					<h2>Abraham Wald</h2>
-					<img src="img/sprt/wald.jpg" style="float: left">
-					<ul style="margin-left: 120px">
-						<li>1902年10月31日生於奧匈帝國</li>		  
-						<li>1927年進入維也納大學，1931年取得博士學位</li>
-						<li>由於宗教原因，無法取得教職機會</li>
-						<li>於二戰前夕，成功移民到美國</li>										
-					</ul>		
-				</section>
-			
 
-				<section>
-					<h2>QA???</h2>
+					<img src="img/sprt/wald.jpg" style="display: inline-block; max-width: 30%">
+					<div style="display: inline-block; max-width: 55%; margin-left:5%;">
+						<ul style="margin-left: 0px;">
+							<li>1902年10月31日生於奧匈帝國</li>		  
+							<li>1927年進入維也納大學，1931年取得博士學位</li>
+							<li>由於宗教原因，無法取得教職機會</li>
+							<li>於二戰前夕，成功移民到美國</li>										
+						</ul>	
+					</div>
 				</section>
+
+				<section style="text-align: left;">
+					<h2>Life in SRG(1)</h2>										
+					<p>二戰期間，Wald 在哥倫比亞大學的 Statistical Research Group服務，負責解決戰爭期間的技術問題</p>						
+				</section>
+
+				<section style="text-align: left;">
+					<h2>Life in SRG(2)</h2>										
+					<img src="img/sprt/survivor.png" width="400px" style="display: inline-block; max-width: 35%">
+					<div style="display: inline-block; max-width: 55%; margin-left:5%;">
+						<p>著名的存活者偏差(Survivorship bias)就是在這時候提出</p>
+						<p>故事常常被去脈絡化，其實Wald 也是經過仔細的計算才提出</p>	
+						<p style="font-size: 0.6em;color: #8c8c8c">Ref : "A METHOD OF ESTIMATING PLANE VULNERABILITY BASED ON DAMAGE OF SURVIVORS"</p>
+					</div>
+				</section>			
+
+				<section style="text-align: left;">
+					<h2>英年早逝</h2>		
+					<div style="display: inline-block; max-width: 25%">						
+						<img src="img/sprt/robert.jpg" width="300px">
+					</div>
+					<div style="display: inline-block; max-width: 65%; margin-left:5%;">
+						<ul>
+							<li>1950年，Wald夫妻受印度政府邀約造訪印度，卻遇上飛機失事，享年48歲。</li>
+							<li>當時年僅三歲的兒子Robert Wald，後來成為一個著名的物理學家<br><br><br><br>
+							</li>	
+						</ul>
+					</div>				
+				</section>
+
+				<section style="text-align: left;">
+					<h2>SPRT:background(1)</h2>
+					<ul>
+						<li>Proability</li>
+						<ul style="font-size: 0.7em">
+							<li>Kolmogorov's axiomatics, limit theorem, stochastic process</li>
+						</ul>						
+						<li>Statistics</li>
+						<ul style="font-size: 0.7em">
+							<li>NP theorem, hypothesis testing, estimation, decision theory</li>
+						</ul>							
+					</ul>							
+				</section>
+				
+				<section style="text-align: left;">
+					<h2>SPRT:background(2)</h2>
+					<ul>
+						<li>靈感來自 Allen Wallis 與 Milton Friedman：</li>
+						<div style="margin-left: 50px; font-size: 0.9em;">
+							<p>若拒絕域可以表達成以下形式：</p>
+							<p>$\Psi(x_1) + \Psi(x_2) + ... +\Psi(x_N)>C_N$</p>
+							<p>且$\Psi()$非負，我們可以在樣本數到N以前就提早拒絕</p>
+						</div>
+						<li>兩人跑去找Wald求認同，最後由Wald發揚光大</li>
+
+					</ul>							
+				</section>									
+
+				<section style="text-align: left;">
+					<h2>SPRT:background(3)</h2>
+					<p>Wald的研究結果於1943年發表，但在戰爭期間，所以無法公開於眾。</p>				
+				</section>		
+
+				<section style="text-align: left;">
+					<h2>SPRT:influence</h2>
+						<ol style="margin-left: 0px;">
+							<li>Experimental scientists and staticticians started collaborating with each other. </li>		  
+							<li>文中內容啟發許多新的研究方向</li>
+							<li>使用簡單，使得統計方法傳播更廣</li>
+							<li>開啟將序列方法用於統計中的研究</li>
+						</ol>						
+				</section>		
+
+				<section style="text-align: left;">
+					<h2>SPRT:方法概要</h2>
+					<ul>
+						<li>觀測值一個一個進來，每次都做以下決定</li>
+						<ul style="font-size: 0.7em">
+							<li>拒絕$H_0$</li>
+							<li>接受$H_0$</li>
+							<li>不拒絕不接受，繼續實驗</li>
+						</ul>						
+						<li>樣本數可以視為一隨機變數</li>
+						<li>找到平均樣本數最少的檢定方法</li>							
+					</ul>						
+				</section>	
 
 			</div>
 		</div>
