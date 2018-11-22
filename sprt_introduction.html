@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js</title>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<!-- my own css -->
+	<style type="text/css">
+		@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+		body{
+			font-family: 'Noto Sans TC', sans-serif;
+		} 
+		h1,h2,h3,h4 {
+			text-transform: none !important;
+			letter-spacing: 1px !important;			
+
+		}
+		#covertitle {
+			letter-spacing: 0px !important;				
+		}
+		.reveal p {
+		  	font-size: 0.8em;
+		    text-align: left;
+			font-family: 'Noto Sans TC', sans-serif;
+		    
+		}
+		.reveal h1 {
+			font-family: 'Noto Sans TC', sans-serif;			
+		  	font-size: 2em;
+		  	font-weight: bold;
+		  	text-align: left;
+		}
+		.reveal h2 {
+			font-family: 'Noto Sans TC', sans-serif;
+		  	font-size: 1.6em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal h3 {
+		  	font-size: 1.3em;
+		  	margin-bottom: 0.7em;
+		  	text-align: left;
+		}
+		.reveal ol>li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		  	text-align: left;
+
+		}
+		.reveal ul>li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		  	text-align: left;
+
+		}
+	
+		.reveal li{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 1em;
+		    margin-top: 0.8em;
+		  	text-align: left;		    
+		}		
+		.reveal tr,th{
+			font-family: 'Noto Sans TC', sans-serif;			
+		    font-size: 0.8em;
+		    text-align: left;		    
+		}
+
+		.reveal section img {
+		 	background:none; 
+		 	border:none; 
+		 	box-shadow:none; 
+		}
+		.vid{
+			 background-color: rgba(214, 245, 245,0.7);
+
+		}
+		code{
+			font-size: 28px !important;
+			line-height: 30px !important;
+
+		}
+
+	</style>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section style="text-align: left;">
+					<h3 id="covertitle">Introduction to <br>Wald Sequential Test of Statistical Hyphotheses</h3>
+					<p>賴東昇</p>
+					<p>連結 : <a href="https://hyades910739.github.io/reveal.js/pytorch_ch4.html#/">https://hyades910739.github.io/reveal.js/sprt_introduction.html#/</a></p>
+					
+				</section>
+
+				<section style="text-align: left;">
+					<h2>Abraham Wald</h2>
+					<img src="img/sprt/wald.jpg" style="float: left">
+					<ul style="margin-left: 120px">
+						<li>1902年10月31日生於奧匈帝國</li>		  
+						<li>1927年進入維也納大學，1931年取得博士學位</li>
+						<li>由於宗教原因，無法取得教職機會</li>
+						<li>於二戰前夕，成功移民到美國</li>										
+					</ul>		
+				</section>
+			
+
+				<section>
+					<h2>QA???</h2>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				//width:800,
+				//height:500,
+				//margin:0.1,
+
+				//minScale:1.2,
+				//maxScale: 5,
+				progress:true,
+				slideNumber: true,
+				history: true,
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math-katex/math-katex.js', async: true },
+				]
+			});
+		</script>
+	</body>
+</html>
